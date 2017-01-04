@@ -4,14 +4,14 @@
 
 ## 功能说明
 
-在膜蛤跳基础上，增加了微信登陆，排行榜，微信录音，七牛解析存储功能。
+在膜蛤跳基础上，增加了微信登陆，排行榜，微信录音，七牛解析存储，socket.io实时成绩功能。
 
 ## 使用到的第三方服务
 
 微信，七牛
 
 ## 需要手动补充的文件 too simple 的办法
-根目录下config.js, 配置了wt以及微信部分
+根目录下config.js, 配置了jwt以及微信部分
 ```
 export const SECRET = 'xxxxxxxx';
 export const MONGO_URL = process.env.MONGO_URL;
