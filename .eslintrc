@@ -1,0 +1,10 @@
+{
+"extends": "airbnb/base",
+"new-cap": 0,
+"env": {
+    "node": 1
+  },
+"rules":{
+    "comma-dangle": 0,
+  }
+}

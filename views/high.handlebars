@@ -1,0 +1,58 @@
+<h1>Too simple, sometimes naive</h1>
+<a class="startButton" href="./">回去膜</a>
+  <ul id="tab">
+    <li>周榜</li><li>月榜</li><li>日榜</li>
+  </ul>
+  {{#each scores}}
+    <ol class="scoreContainer">
+      {{#each this}}
+      <li class="scoreitem">
+        <img src="{{from.headimgurl}}"/>
+        <span>{{from.nickname}}</span>
+        <span class="highscore">单次续了{{plus}}s</span>
+      </li>
+      {{/each}}
+    </ol>
+  {{/each}}
+
+<script>
+var scoreItems = document.getElementsByClassName('scoreContainer');
+var tab = document.getElementById('tab');
+
+scoreItems[0].classList.add('active');
+tab.children[0].classList.add('active');
+
+tab.addEventListener('click', function (event) {
+  if (event.target.localName === 'li') {
+    var index = 2;
+    var target = event.target;
+    while (target.nextElementSibling) {
+      target = target.nextElementSibling;
+      index--;
+    }
+    Array.prototype.forEach.call(scoreItems, (function(item, i) {
+      item.classList.remove('active');
+      tab.children[i].classList.remove('active');
+    }));
+    tab.children[index].classList.add('active');
+    scoreItems[index].classList.add('active');
+  }
+}); 
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  wx.config(JSON.parse('{{{jsData}}}'));
+  wx.ready(function() {
+    var shareAtBegining = {
+      title: '没想到这么多人在给长者续命……' , // 分享标题
+      desc: '穿上红色的衣服，加入续命的队伍吧', // 分享描述
+      link: 'http://moha.taskbee.cn/high', // 分享链接
+      imgUrl: 'http://moha.taskbee.cn/images/frog.png', // 分享图标
+    };
+    wx.onMenuShareTimeline(shareAtBegining);
+    wx.onMenuShareAppMessage(shareAtBegining);
+    wx.onMenuShareQQ(shareAtBegining);
+    wx.onMenuShareWeibo(shareAtBegining);
+    wx.onMenuShareQZone(shareAtBegining);
+  });
+</script>

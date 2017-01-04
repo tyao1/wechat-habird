@@ -1,0 +1,31 @@
+<style>
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  li {
+    padding: 13px 12px;
+    border-bottom: 1px solid #ecebed;
+  }
+  audio {
+    display: block;
+    margin: 0 auto;
+  }
+  span {
+    margin-top: 3px;
+    font-size: 16px;
+    display: inline-block;
+  }
+</style>
+<h1>有一种被钦定的感觉</h1>
+<a class="startButton" href="./">回去膜</a>
+
+<ul>
+  {{#each records}}
+  <li>
+    <audio src={{audio}} controls></audio>
+    <span>{{state}}</span>
+    <span>{{left}}</span>
+  </li>
+  {{/each}}
+</ul>

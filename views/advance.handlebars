@@ -1,0 +1,62 @@
+<style>
+h1 {
+  margin: 12px;
+}
+#container {
+  margin: 0 auto;
+  width: 140px;
+  height: 140px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 70px;
+}
+.motext {
+  margin: 12px 12px 22px;
+  border: 1px solid #cfcfcf;
+  padding: 12px 9px;
+  border-radius: 12px;
+  color: #676869;
+  
+}
+.motext span {
+  display: block;
+  margin: 12;
+}
+.wrapper {
+  min-height: 100%;
+  min-height: 100vh;
+}
+#confirm {
+  height: auto;
+  width: 120px;
+  margin: 36px auto 24px;
+  padding: 12px 0;
+  font-size: 14px;
+}
+</style>
+<div class="wrapper">
+  <h1>高级膜！</h1>
+  <a class="startButton" href="./">回去膜</a>
+
+  <p class="motext">
+  <span>😎</span>
+    用你内心深处的话语膜蛤🎶！现在录制你的膜蛤语吧，最多支持1分钟。在每次膜蛤游戏结束后，将随机播放大家的膜蛤语。🏠为了保证膜的质量，每一条高级膜收取💰5毛，可以持续膜1个月！
+    <a href="./list">我的高级膜</a>
+  </p>
+  <div id="recordSection">
+    <div id="container">
+    </div>
+    <div id="confirm" class="startButton">
+      就用这句膜
+    </div>
+  </div>
+</div>
+<link href="//cdn.bootcss.com/notie/3.2.0/notie.min.css" rel="stylesheet">
+<script src="./progressbar.min.js"></script>
+<script src="//cdn.bootcss.com/notie/3.2.0/notie.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  wx.config(JSON.parse('{{{jsData}}}'));
+</script>
+<script src="./superagent.min.js"></script>
+<script src='./advance.js'></script>

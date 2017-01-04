@@ -1,0 +1,100 @@
+<script>
+if ("wView" in window) {
+  window.wView.allowsInlineMediaPlayback = "YES";
+  window.wView.mediaPlaybackRequiresUserAction = "NO";
+}
+</script>
+<div id="score">
+    <div class="images">
+      <div class="main-image"><img src="{{{userData.headimgurl}}}"/><span>-1s</span></div>
+      <div class="main-image"><img src="./images/frog.png"/><span>+1s</span></div>
+    </div>
+    <h1>我为长者续命</h1>
+    <p>经历了{{{scores.count}}}次续命</p>    
+    <section class="card">
+      <p class="totalScore">长者总共被续<span id="totalScore">{{{scores.totalPlus}}}秒</span></p>
+      <p class="totalCost">玩家一共献出了<span id="totalCost">{{{scores.totalMinus}}}秒生命</span></p>
+      <button class="startButton" id="go">我来续命</button>
+      <div class="controlls">
+        <a class="gotohigh" href="./high">续命榜</a><a class="gotohigh" href="./advance">高级膜</a>
+      </div>
+    </section>
+</div>
+<div id="notisVoice"></div>
+<div id="notis"></div>
+<div id="screen"></div>
+<audio id="voice" autoplay></audio>
+<script src="socket.js"></script>
+<script>
+if ("wView" in window) {
+  window.wView.allowsInlineMediaPlayback = "YES";
+  window.wView.mediaPlaybackRequiresUserAction = "NO";
+}
+var notis = document.querySelector('#notis');
+var notTimeout;
+function clear() {
+  notis.innerHTML = '';
+}
+function buildNoti(data) {
+  clearTimeout(notTimeout);
+  var str = '<div class="noti">'+
+    '<img src="' + data.headimgurl + '" class="avatar">'+
+    '<span class="notiName">' + data.nickname + '</span>'+
+    '<span>刚刚给长者续了</span>'+
+    '<span class="notiScore">' + data.plus + '</span>'+
+    '<span>s</span>'+
+  '</div>';
+  console.log(str);
+  notis.innerHTML = str;
+  notTimeout = setTimeout(clear, 5000);
+}
+
+function initSocket() {
+  var socket = io('', {path: '/ws'});
+
+  /*
+    提示框
+  */
+  function login() {
+    socket.emit('bearer', '{{{token}}}');
+  }
+  socket.on('connect', login);
+  socket.on('reconnect', login);
+  socket.on('newScore', function(data) {
+    console.log(data);
+    buildNoti(data);
+  });
+  socket.on('bearer', function() {
+    console.log('connected');
+    connected = true;
+  });
+  socket.on('disconnect', function(err) {
+    console.log(err);
+    connected = false;
+  });
+  return socket;
+}
+var socket = initSocket();
+var connected = false;
+</script>
+<script src="./phaser.min.js"></script>
+<script src="./superagent.min.js"></script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  wx.config(JSON.parse('{{{jsData}}}'));
+  wx.ready(function() {
+    var shareAtBegining = {
+      title: '一个游戏考验你是不是他真正的粉丝！' , // 分享标题
+      desc: '经历了粉丝们{{{scores.count}}}次续命，为他续了{{{scores.totalPlus}}}秒，总共奉献了{{{scores.totalMinus}}}秒生命。你呢？', // 分享描述
+      link: 'http://moha.taskbee.cn/', // 分享链接
+      imgUrl: 'http://moha.taskbee.cn/images/frog.png', // 分享图标
+    };
+    wx.onMenuShareTimeline(shareAtBegining);
+    wx.onMenuShareAppMessage(shareAtBegining);
+    wx.onMenuShareQQ(shareAtBegining);
+    wx.onMenuShareWeibo(shareAtBegining);
+    wx.onMenuShareQZone(shareAtBegining);
+  });
+</script>
+<script src="./main.js"></script>
