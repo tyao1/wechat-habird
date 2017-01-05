@@ -23,7 +23,7 @@ export const weAppId = 'xxxxxx';
 export const weSecret = 'xxxxxxx;
 
 import fs from 'fs';
-const jiongjubu = 'jiongjubujiongjubujiongjubujiong';
+const jiongjubu = 'xxxxxxxx';
 export const wePayConfig = {
   partnerKey: xxxx,
   appId: xxxx,
@@ -45,3 +45,6 @@ export default qiniu;
 
 ## 游戏来源
 [原版游戏在此](https://github.com/tusenpo/FlappyFrog)
+
+## License
+[Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/)
